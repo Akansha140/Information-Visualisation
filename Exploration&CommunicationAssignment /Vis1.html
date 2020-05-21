@@ -1,0 +1,124 @@
+<html>
+<head>
+    <title> Akansha Khare - Assignment</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.9.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.0.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.2.1"></script>
+</head>
+<body>
+    <table style="width: 850px" cellspacing="5" cellpadding="5">
+    <tbody>
+    <tr>
+    <td style="width: 200px; vertical-align: top;"><strong>Name:&nbsp;</strong></td>
+    <td style="vertical-align: top;">Akansha Khare</td>
+    </tr>
+    <tr>
+    <td style="vertical-align: top;"><strong>Student Number:</strong></td>
+    <td style="vertical-align: top;">19201041</td>
+    </tr>
+    <tr>
+    <td style="vertical-align: top;"><strong>Dataset description:</strong></td>
+    <td style="vertical-align: top;">
+    <p><a href="https://data.gov.ie/dataset/2016-make-model-year-failures-at-nct" target="_blank" rel="noopener">NCT Failure Rates 2016</a>.</p>
+    <p>This data set contains pass/fail rates of VehicleMake and it's model for National Car Testing services in 2016.</p>
+    </td>
+    </tr>
+    <tr>
+    <td style="vertical-align: top;"><strong>Initial questions</strong></td>
+    <td style="vertical-align: top;">How do Engine, Noise and Exhaust %, Side Slip Test %, Lighting and Electrical % vary for each VehicleMake whose model birth year is greater than 2000? What is the relationship between VehicleMake and Engine, Noise and Exhaust %, Side Slip Test %, Lighting and Electrical %?</td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+  <div id="vis" class="container"></div>
+  <script type="text/javascript">
+    var yourVlSpec =  {
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "title": {
+    "text": "Vehicle Models Failed due to Engine, Noise and Exhaust %, Side Slip Test %, Lighting and Electrical %",
+    "anchor": "middle"
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/Akansha140/Information-Visualisation/master/Make%20Model%20Data%202016.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "transform": [
+     {
+      "filter": "datum.YearOfBirth > 2000"
+    }
+  ],
+  "repeat": {
+    "column": [
+      "Engine, Noise and Exhaust %",
+      "Side Slip Test %",
+      "Lighting and Electrical %"
+    ]
+  },
+  "spec": {
+    "mark": "bar",
+    "encoding": {
+      "y": {
+        "field": "VehicleMake",
+        "type": "nominal",
+        "axis": {
+          "title": "VehicleMake",
+          "titleFontSize": 15
+        },
+        "sort": {
+          "op": "mean",
+          "field": {
+            "repeat": "column"
+          },
+          "order": "descending"
+        }
+      },
+      "x": {
+        "field": {
+          "repeat": "column"
+        },
+        "type": "quantitative",
+        "aggregate": "mean"
+      },
+      "color": {
+        "condition": {
+          "test": "datum.VehicleMake == 'ROVER'",
+          "value": "#008000"
+        },
+        "value": "#ff0000"
+      }
+    }
+  }
+}   
+    vegaEmbed("#vis", yourVlSpec);
+  </script>
+    <hr />
+<table style="width: 850px;" cellspacing="5" cellpadding="5">
+<tbody>
+<tr>
+<td style="width: 200px; vertical-align: top;"><strong>Description:&nbsp;</strong></td>
+<td style="vertical-align: top;">Three bar chart shows Engine, Noise and Exhaust %, Side Slip Test %, Lighting and Electrical % of different VehicleMake of NCT Failure. 
+Each bar chart is sorted from maximum to minimum for each attribute. ROVER is highlighted in darker colours. </td>
+</tr>
+<tr>
+<td style="vertical-align: top;"><strong>Insight:</strong></td>
+<td style="vertical-align: top;">In the bar chart for mean of  Engine, Noise and Exhaust %, we might except that VehicleMake like TESLA, ROVER, AUDI are world famous brand which are supposed to have zero Engine, Noise and Exhaust % for all the models. But, ROVER is having more than 10 % mean percentage failure. 
+Althought for ROVER, the mean of Lighting and Electrical % is less than the mean of Engine, Noise and Exhaust %. There are very less VehicleMake who are having zero failure mean percentage of Lighting and Electrical %. 
+VehicleMake like TESLA, TATA are having zero mean percentage of Lighting and Electrical and mean percentage of Engine, Noise and Exhaust but they are having very high mean percentage failure of Side Slip Test. From all the three bar charts, VehicleMake like TIGER,TVR are having the smallest mean percentage of failure for all the three attributes.
+<p/>
+<tr>
+<td style="vertical-align: top;"><strong>Design considerations</strong></td>
+<td style="vertical-align: top;">
+I have used bar chart as it is a very effective way to show the relationship between quantitative variables and categorical variables. To visualise the chart clearly, sorting is used to sort vehiclemake by mean of each attributes in descending order. After sorting,  VehicleMake which are having the highest mean percentage failure on the top and the lowest mean percentage failure are at the bottom. From the bar chart, we can see that I have highlighted ROVER vehiclemake because it is having different mean percentage for each attribute so that we can analyse the variation of attributes.
+</td>
+</tr>
+<tr>
+<td style="width: 200px; vertical-align: top;"><strong>Data filtering and transformation:&nbsp;</strong></td>
+<td style="vertical-align: top;"> I have used filter property so that I can get the filtered data of VehicleMake whose models are manufactured after 2000 and it is helpful to   understand that there are many VehicleMake who didn't manufacture large number of models in later years and it makes the visualisations clear.
+</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

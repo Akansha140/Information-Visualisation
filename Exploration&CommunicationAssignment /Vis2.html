@@ -1,0 +1,99 @@
+<html>
+<head>
+    <title> Akansha Khare - Assignment</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.9.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.0.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.2.1"></script>
+</head>
+<body>
+    <table style="width: 850px" cellspacing="5" cellpadding="5">
+    <tbody>
+    <tr>
+    <td style="width: 200px; vertical-align: top;"><strong>Name:&nbsp;</strong></td>
+    <td style="vertical-align: top;">Akansha Khare</td>
+    </tr>
+    <tr>
+    <td style="vertical-align: top;"><strong>Student Number:</strong></td>
+    <td style="vertical-align: top;">19201041</td>
+    </tr>
+    <tr>
+    <td style="vertical-align: top;"><strong>Dataset description:</strong></td>
+    <td style="vertical-align: top;">
+    <p><a href="https://data.gov.ie/dataset/2016-make-model-year-failures-at-nct" target="_blank" rel="noopener">NCT Failure Rates 2016</a>.</p>
+    <p>This data set contains pass/fail rates of VehicleMake and it's model for National Car Testing services in 2016.</p>
+    </td>
+    </tr>
+    <tr>
+    <td style="vertical-align: top;"><strong>Initial questions</strong></td>
+    <td style="vertical-align: top;">How do Wheels and Tyres percentage vary for each YearOfBirth? What is the relationship between YearOfBirth and Wheels and Tyres percentage?</td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+  <div id="vis" class="container"></div>
+  <script type="text/javascript">
+    var yourVlSpec = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "width": 800,
+  "height": 600,
+  "data": {
+    "url": "https://raw.githubusercontent.com/Akansha140/Information-Visualisation/master/Make%20Model%20Data%202016.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum.YearOfBirth > 1991"
+    }
+  ],
+  "mark": "line",
+  "title": {
+    "text": "NCT Failure - YearOfBirth vs Wheels and Tyres %",
+    "anchor": "middle"
+  },
+  "encoding": {
+    "x": {
+      "field": "YearOfBirth",
+      "type": "temporal",
+      "axis": {
+        "title": "YearOfBirth",
+        "titleFontSize": 15
+      }
+    },
+    "y": {
+      "field": "Wheels and Tyres %",
+      "type": "quantitative",
+      "aggregate": "mean",
+      "axis": {
+        "title": "Mean of Wheels and Tyres %",
+        "titleFontSize": 15
+      }
+    }
+  }
+}
+        vegaEmbed("#vis", yourVlSpec);
+  </script>
+    <hr />
+<table style="width: 850px;" cellspacing="5" cellpadding="5">
+<tbody>
+<tr>
+<td style="width: 200px; vertical-align: top;"><strong>Description:&nbsp;</strong></td>
+<td style="vertical-align: top;">This line chart shows the relationship between YearOfBirth  and Wheels and Tyres percentage of NCT Failure.</td>
+</tr>
+<tr>
+<td style="vertical-align: top;"><strong>Insight:</strong></td>
+<td style="vertical-align: top;">In the line graph, we can see that there is a gradually increasing and decreasing of mean percentage failure due to Wheels and Tyres % from 1974 to 2016.  There is a sudden rise in 1975, 1978,1984 and 2014. Whereas, there is a continuous decrease from 2010 to 2014 and 2016.  We can say that the number of vehicle models are having lowest failure rate during this year.  Also, there is a slightly increasing and decreasing of mean failure due to Wheels and Tyres % from 1991 to 2007 and also the number of vehicle models failure are almost equal over this period.</td>
+</tr>
+<tr>
+<td style="vertical-align: top;"><strong>Design considerations</strong></td>
+<td style="vertical-align: top;">I have used line graph so that the independent data are on the horizontal X-axis (e.g. YearOfBirth ) and the dependent data are on the vertical y-axis. It is used to track changes over periods of time. The mean of Wheel and Tyres % is taken to get average percentage of each year because the data is very large so summarized data is required for visualization. If we used bar chart then it is difficult to analyse the pattern over a period of year.</td>
+</tr>
+<tr>
+<td style="width: 200px; vertical-align: top;"><strong>Data filtering and transformation:&nbsp;</strong></td>
+<td style="vertical-align: top;">No filtering and transformation of data has been done.</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
